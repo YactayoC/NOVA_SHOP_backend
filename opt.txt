@@ -1,0 +1,3 @@
+Cliente solo edita su perfil
+Admin edita los de admin
+La pagina principal sera en user
