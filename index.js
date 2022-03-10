@@ -4,7 +4,7 @@ import cors from 'cors';
 import multer from "multer";
 
 import connectDB from './config/db.js';
-//import employeeRoutes from './routes/employeeRoutes.js';
+import employeeRoutes from './routes/employeeRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 
 
@@ -31,7 +31,7 @@ connectDB();
 
 
 // Routes
-//app.use('/api/employees', employeeRoutes);
+app.use('/api/employees', employeeRoutes);
 app.use('/api/user', userRoutes);
 
 

@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
-import generateId from "../helpers/generateId.js";
+import generateToken from "../helpers/generateToken.js";
 
-const employeeSchema = {
+const employeeSchema = mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -32,14 +32,14 @@ const employeeSchema = {
 
     token: {
         type: String,
-        default: generateId()
+        default: generateToken()
     },
 
-    confirmed: {
-        type: Boolean,
-        default: false
-    }
-}
+    // confirmed: {
+    //     type: Boolean,
+    //     default: false
+    // }
+})
 
 employeeSchema.pre('save', async function (next) {
     if (!this.isModified('password')) {
@@ -50,7 +50,7 @@ employeeSchema.pre('save', async function (next) {
     this.password = await bcrypt.hash(this.password, salt);
 })
 
-adminSchema.methods.checkPassword = async function(passwordForm) {
+employeeSchema.methods.checkPassword = async function(passwordForm) {
     return await bcrypt.compare(passwordForm, this.password);
 }
 

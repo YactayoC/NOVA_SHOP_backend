@@ -1,3 +1,12 @@
 Cliente solo edita su perfil
 Admin edita los de admin
 La pagina principal sera en user
+
+Cliente:
+Registro y confirmacion de cuenta
+Login y autenticacion
+Recuperacion de password y confirmacion de password
+Ver y actualizar perfil
+
+- Falta comprar.
+- Vistas publcias

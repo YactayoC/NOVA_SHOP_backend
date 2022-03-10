@@ -15,16 +15,19 @@ import {
 const router = express.Router();
 
 // Public
-router.post('/register', register); // okey
-router.get('/confirm/:token', confirmToken); // okey
+router.post('/register', register);
+router.get('/confirm/:token', confirmToken); 
+router.post('/login', authenticate);
+router.post('/forget-password', forgetPassword); 
+router.route('/forget-password/:token').get(checkToken).post(newPassword);
 
-router.post('/login', authenticate); // okey
-
-router.post('/forget-password', forgetPassword); // okey
-router.route('/forget-password/:token').get(checkToken).post(newPassword); // okey
+// falta
+// router.get('/home', showProductH);
+// router.get('/products', showProductsP);
+// router.get('/cart', cart);
 
 // private
-router.get('/profile', checkAuth, profile) // okey
-router.put('/profile/:id', checkAuth, updateUser) // okey
+router.get('/profile', checkAuth, profile);
+router.put('/profile/:id', checkAuth, updateUser);
 
 export default router;
