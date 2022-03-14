@@ -1,8 +1,7 @@
 import Employee from '../models/Employee.js'
+import User from '../models/User.js'
 import Product from '../models/Product.js'
 import generateJWT from '../helpers/generateJWT.js'
-
-// requiere enctype
 
 const authenticate = async (req, res) => {
     const { email, password } = req.body;
@@ -28,9 +27,13 @@ const authenticate = async (req, res) => {
     }
 }
 
+// requiere enctype
+// action = url, method post enctype=multipart/form-data
 const addProduct = async (req, res) => {
     const { name } = req.body;
-
+    // const img = req.file
+    const  img  = req.file;
+    console.log(img);
     const productExist = await Product.findOne({ name: name });
     if (productExist) {
         const error = new Error('The product exists');
@@ -45,6 +48,7 @@ const addProduct = async (req, res) => {
         console.log(error);
     }
 }
+// funcion agrega imagen
 
 const getProducts = async (req, res) => {
     const products = await Product.find();
@@ -71,9 +75,12 @@ const getProduct = async (req, res) => {
     }
 }
 
+// requiere enctype
+// action = url, method post enctype=multipart/form-data
 const updateProduct = async (req, res) => {
     const { id } = req.params;
     const { name, price, quantity, description } = req.body
+    // const img = req.file
     const productExist = await Product.findOne({ _id: id });
 
     if (!productExist) {
@@ -111,4 +118,9 @@ const deleteProduct = async (req, res) => {
     }
 }
 
-export { authenticate, addProduct, getProducts, getProduct, updateProduct, deleteProduct }
+const getClients = async (req, res) => {
+    const clients = await User.find({ confirmed: true });
+    res.json(clients);
+}
+
+export { authenticate, addProduct, getProducts, getProduct, updateProduct, deleteProduct, getClients }

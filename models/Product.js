@@ -21,11 +21,15 @@ const productSchema = {
         required: true
     },
 
-    // urlImage: {
-    //     data: Buffer,
-    //     contentType: String,
-    //     required: true
-    // }
+    image: {
+        title: { type: String},
+        description: {type: String},
+        filename: {type: String},
+        path: {type: String},
+        originalname: {type: String},
+        mimetype: {type: String},
+        size: {type: Number},
+    }
 }
 
 const Product = mongoose.model('Product', productSchema);

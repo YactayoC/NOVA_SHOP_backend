@@ -7,30 +7,31 @@ import {
     getProducts,
     getProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    getClients,
 } 
 from '../controllers/employeeController.js'
 
 
 const router = express.Router();
 
+router.post('/login', authenticate);
+
 // Products
 router
     .route('/products')
-    .post(checkAuth, addProduct) // okey
-    .get(checkAuth, getProducts); // okey
+    .post(checkAuth, addProduct)
+    .get(checkAuth, getProducts); 
 
 router  
     .route('/product/:id')
-    .get(checkAuth, getProduct) // okey
+    .get(checkAuth, getProduct) 
     .put(checkAuth, updateProduct) 
-    .delete(checkAuth, deleteProduct)
+    .delete(checkAuth, deleteProduct);
 
 // Clients
-// router
-//     .route('/clients')
-//     .get(checkAuth, getClients);
-
-router.post('/login', authenticate);
+router
+    .route('/clients')
+    .get(checkAuth, getClients);
 
 export default router;

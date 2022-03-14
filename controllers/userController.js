@@ -1,4 +1,5 @@
 import User from '../models/User.js';
+import Product from '../models/Product.js'
 
 import generateJWT from '../helpers/generateJWT.js';
 import generateToken from '../helpers/generateToken.js';
@@ -144,6 +145,20 @@ const newPassword = async (req, res) => {
     }
 }
 
+const showProductsH = async (req, res) => {
+    const products = await Product.find().sort({$natural: -1}).limit(5);
+    res.json(products);
+}
+
+const showProductsP = async (req, res) => {
+    const products = await Product.find();
+    res.json(products);
+}
+
+const card = async (req, res) => {
+    
+}
+
 const profile = async (req, res) => {
     const { user } = req;
     res.json(user);
@@ -178,6 +193,6 @@ const updateUser = async (req, res) => {
 
 }
 
-export { register, confirmToken, authenticate, forgetPassword, checkToken, newPassword, profile, updateUser };
+export { register, confirmToken, authenticate, forgetPassword, checkToken, newPassword, showProductsH, showProductsP, profile, updateUser };
 
 

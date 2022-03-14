@@ -8,6 +8,8 @@ import {
     forgetPassword,
     checkToken,
     newPassword,
+    showProductsH,
+    showProductsP,
     profile, 
     updateUser
 } from '../controllers/userController.js'
@@ -22,8 +24,8 @@ router.post('/forget-password', forgetPassword);
 router.route('/forget-password/:token').get(checkToken).post(newPassword);
 
 // falta
-// router.get('/home', showProductH);
-// router.get('/products', showProductsP);
+router.get('/home', showProductsH);
+router.get('/products', showProductsP);
 // router.get('/cart', cart);
 
 // private
