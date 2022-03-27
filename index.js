@@ -34,20 +34,20 @@ app.use(cors(corsOptions));
 app.use("/api/employees", employeeRoutes);
 app.use("/api/user", userRoutes);
 
-// Images
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// // Images
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
-app.use(express.urlencoded({ extended: false }));
+// app.use(express.urlencoded({ extended: false }));
 
-const storage = multer.diskStorage({
-  destination: path.join(__dirname, "./public/img/uploads"),
-  filename: (req, file, cb, filename) => {
-    cb(null, uuidv4() + path.extname(file.originalname));
-  },
-});
+// const storage = multer.diskStorage({
+//   destination: path.join(__dirname, "./public/img/uploads"),
+//   filename: (req, file, cb, filename) => {
+//     cb(null, uuidv4() + path.extname(file.originalname));
+//   },
+// });
 
-app.use(multer({ storage: storage }).single("image"));
+// app.use(multer({ storage: storage }).single("image"));
 
 // Settings
 const PORT = process.env.PORT || 4000;

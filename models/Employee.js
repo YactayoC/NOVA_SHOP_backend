@@ -4,55 +4,50 @@ import bcrypt from "bcrypt";
 import generateToken from "../helpers/generateToken.js";
 
 const employeeSchema = mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    },
+  name: {
+    type: String,
+    required: true,
+  },
 
-    lastname: {
-        type: String,
-        required: true
-    },
+  lastname: {
+    type: String,
+    required: true,
+  },
 
-    email: {
-        type: String,
-        required: true
-    },
+  dni: {
+    type: String,
+    required: true,
+  },
 
-    password: {
-        type: String,
-        required: true
-    },
+  email: {
+    type: String,
+    required: true,
+  },
 
-    phone: {
-        type: String,
-        default: null,
-        trim: true
-    },
+  password: {
+    type: String,
+    required: true,
+  },
 
-    token: {
-        type: String,
-        default: generateToken()
-    },
+  phone: {
+    type: String,
+    default: null,
+    trim: true,
+  },
+});
 
-    // confirmed: {
-    //     type: Boolean,
-    //     default: false
-    // }
-})
+employeeSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    next();
+  }
 
-employeeSchema.pre('save', async function (next) {
-    if (!this.isModified('password')) {
-        next();
-    }
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
 
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-})
+employeeSchema.methods.checkPassword = async function (passwordForm) {
+  return await bcrypt.compare(passwordForm, this.password);
+};
 
-employeeSchema.methods.checkPassword = async function(passwordForm) {
-    return await bcrypt.compare(passwordForm, this.password);
-}
-
-const Employee = mongoose.model('Employee', employeeSchema);
+const Employee = mongoose.model("Employee", employeeSchema);
 export default Employee;
