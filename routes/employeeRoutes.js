@@ -8,6 +8,7 @@ import {
   getProduct,
   updateProduct,
   deleteProduct,
+  getClientsSummary,
   getClients,
   getEmployees,
   addEmployee,
@@ -35,9 +36,11 @@ router
   .delete(checkAuth, deleteProduct);
 
 // Clients
+router.route("/clients-summary").get(checkAuth, getClientsSummary);
 router.route("/clients").get(checkAuth, getClients);
 
 // Employess
+
 router
   .route("/employees")
   .post(checkAuth, addEmployee)

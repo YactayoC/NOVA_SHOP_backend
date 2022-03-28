@@ -112,6 +112,13 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+const getClientsSummary = async (req, res) => {
+  const clients = await User.find({ confirmed: true })
+    .sort({ $natural: -1 })
+    .limit(5);
+  res.json(clients);
+};
+
 const getClients = async (req, res) => {
   const clients = await User.find({ confirmed: true }).sort({ $natural: -1 });
   res.json(clients);
@@ -231,6 +238,7 @@ export {
   getProduct,
   updateProduct,
   deleteProduct,
+  getClientsSummary,
   getClients,
   getEmployees,
   addEmployee,
