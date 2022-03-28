@@ -27,7 +27,7 @@ const register = async (req, res) => {
       token: userSaved.token,
     });
 
-    res.json({ msg: "Registered successfully" });
+    res.json({ msg: "Successfully registered, please check your email" });
   } catch (err) {
     console.log(err.message);
   }
