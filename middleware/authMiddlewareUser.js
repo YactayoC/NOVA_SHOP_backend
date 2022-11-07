@@ -3,7 +3,14 @@ import User from "../models/User.js";
 
 const checkAuthUser = async (req, res, next) => {
   let token;
+
+  if (!token) {
+    const error = new Error("Invalid token or token does not exist");
+    return next();
+  }
+
   if (
+    token &&
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
   ) {
@@ -11,19 +18,10 @@ const checkAuthUser = async (req, res, next) => {
       token = req.headers.authorization.split(" ")[1];
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       req.user = await User.findById(decoded.id).select("-password -confirmed");
-      // Remplazable por User
-      return next();
     } catch (e) {
-      // const error = new Error("Invalid token");
-      // res.status(404).json({ msg: error.message });
-      console.log(" ");
+      const error = new Error("Invalid token");
+      return res.status(404).json({ msg: error.message });
     }
-  }
-
-  if (!token) {
-    // const error = new Error("Invalid token or token does not exist");
-    // res.status(404).json({ msg: error.message });
-    console.log(" ");
   }
 
   next();

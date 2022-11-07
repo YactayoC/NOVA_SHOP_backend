@@ -40,7 +40,6 @@ router.route("/clients-summary").get(checkAuth, getClientsSummary);
 router.route("/clients").get(checkAuth, getClients);
 
 // Employess
-
 router
   .route("/employees")
   .post(checkAuth, addEmployee)

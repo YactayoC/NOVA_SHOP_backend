@@ -144,8 +144,14 @@ const newPassword = async (req, res) => {
 };
 
 const showProductsH = async (req, res) => {
-  const products = await Product.find().sort({ $natural: -1 }).limit(5);
-  res.json(products);
+  let products = [];
+
+  try {
+    products = await Product.find().sort({ $natural: -1 }).limit(5);
+    return res.json(products);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const showProductsP = async (req, res) => {

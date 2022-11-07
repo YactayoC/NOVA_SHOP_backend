@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
-import generateToken from "../helpers/generateToken.js";
-
 const employeeSchema = mongoose.Schema({
   name: {
     type: String,
